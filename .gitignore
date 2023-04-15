@@ -168,5 +168,5 @@ poetry.toml
 .ruff_cache/
 
 #virtual environment
-chatbot-server-python
+vectorstore-scripts
 

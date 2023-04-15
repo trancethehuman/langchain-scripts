@@ -93,7 +93,8 @@ def initialize_vectorstore(input, vectorstore_name: str):
 
     vectorstore_file_name = f"faiss_{vectorstore_name}"
 
-    vectorstore.save_local(vectorstore_file_name)  # type: ignore
+    vectorstore.save_local(
+        "./output_data/" + vectorstore_file_name)  # type: ignore
 
     print(f"New vectorstore saved locally: {vectorstore_file_name}")
 
@@ -125,4 +126,5 @@ if (load_docs_type) == "urls":
 #     csv_column = input("What's the column that holds the URLs? ")
 #     knowledge = load_documents_as_urls_from_csv_column(csv_path, csv_column)
 
-initialize_vectorstore(knowledge, input("Vectorstore name: "))
+initialize_vectorstore(knowledge,
+                       input("Vectorstore name: "))
