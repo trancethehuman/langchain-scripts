@@ -23,8 +23,9 @@
 
 ## Usage
 
-- Put documents into `/input_data` folder, at the root of this repo
-  - You can put them into a separate folder like `/input_data/my_docs` and later choose the folder loader in `scripts.py` for quick loading
+- Create an `input_data` folder.
+- Put documents into `/input_data` folder, at the root of this repo.
+  - You can put them into a separate folder like `/input_data/my_docs` and later choose the folder loader in `scripts.py` for quick loading.
 - Run `py scripts.py`
   - When asked for file paths, don't include `./input_data` or `./output_data`
 - A new FAISS vector database should be outputed into `/output_data`
