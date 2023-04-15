@@ -1,0 +1,4 @@
+- New virtual env
+  - `python -m venv vectorstore-scripts-python` (Mac)
+  - `python -m venv vectorstore-scripts-python` (Windows)
+- Start virtual env: `source vectorstore-scripts-python/bin/activate` (Mac)
