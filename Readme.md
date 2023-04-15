@@ -1,5 +1,9 @@
 # LangChain Scripts
 
+## What this is
+
+- A collection of scripts to quickly load different types of docs into LangChain and create vector databases (FAISS)
+
 ## Getting Started
 
 - Create New virtual env
