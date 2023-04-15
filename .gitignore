@@ -168,4 +168,8 @@ poetry.toml
 .ruff_cache/
 
 #virtual environment
-vectorstore-scripts
+langchain-scripts
+
+#input and output folders
+input_data
+output_data
