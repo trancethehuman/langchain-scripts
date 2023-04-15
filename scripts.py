@@ -101,23 +101,28 @@ def initialize_vectorstore(input, vectorstore_name: str):
     return
 
 
+input_folder_path = "./input_data/"
+
 # TODO: Add tokens and costs logs to embedding new vectorstore
 load_docs_type = input(
     "How do you want to load docs? (folder, txt, csv, urls, pdf): ")
 knowledge = None
 if (load_docs_type) == "folder":
-    documents_folder = input(
+    documents_folder = input_folder_path + input(
         "What is the path to the folder holding the documents? ")
     glob_pattern = input(
         "What is the glob pattern for search for documents? Leave blank to feed everything. ")
     knowledge = load_all_documents_not_csv_from_folder(
         documents_folder, glob_pattern)
 if (load_docs_type) == "pdf":
-    knowledge = load_document_as_pdf(input("Path to .pdf file: "))
+    knowledge = load_document_as_pdf(
+        input_folder_path + input("Path to .pdf file: "))
 if (load_docs_type) == "txt":
-    knowledge = load_document_as_txt(input("Path to .txt file: "))
+    knowledge = load_document_as_txt(
+        input_folder_path + input("Path to .txt file: "))
 if (load_docs_type) == "csv":
-    knowledge = load_document_as_csv(input("Path to .csv file: "))
+    knowledge = load_document_as_csv(
+        input_folder_path + input("Path to .csv file: "))
 if (load_docs_type) == "urls":
     knowledge = load_documents_as_urls(
         input("Paste the URLs here (separated by commas): "))
