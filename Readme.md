@@ -7,7 +7,7 @@
   - `py -m venv langchain-scripts` (Windows)
 - Start virtual env: `source langchain-scripts/bin/activate` (Mac)
 - Create a new `.env` file and add these details
-- ```
+  ```
   OPENAI_API_KEY=key_here
   ```
 - To enter the new virtual env every time you start your Powershell (Terminal) in this directory, add this to `.env` file
