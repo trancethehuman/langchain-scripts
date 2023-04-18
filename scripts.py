@@ -97,7 +97,7 @@ def initialize_vectorstore(input, vectorstore_name: str):
     texts = text_splitter.split_documents(input)
 
     vectorstore = FAISS.from_documents(texts, embeddings)
-    vectorstore_file_name = f"faiss_{vectorstore_name}"
+    vectorstore_file_name = vectorstore_name
     print("Vectorstore created.")
 
     save_faiss_locally(vectorstore, vectorstore_file_name)
