@@ -168,7 +168,7 @@ poetry.toml
 .ruff_cache/
 
 #virtual environment
-langchain-scripts
+virtual-env
 
 #input and output folders
 input_data

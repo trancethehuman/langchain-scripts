@@ -7,9 +7,9 @@
 ## Getting Started
 
 - Create New virtual env
-  - `python -m venv langchain-scripts` (Mac)
-  - `py -m venv langchain-scripts` (Windows)
-- Start virtual env: `source langchain-scripts/bin/activate` (Mac)
+  - `python -m venv virtual-env` (Mac)
+  - `py -m venv virtual-env` (Windows)
+- Start virtual env: `source virtual-env/bin/activate` (Mac)
 - Create a new `.env` file and add these details
   ```
   OPENAI_API_KEY=key_here
@@ -19,7 +19,7 @@
   Windows 11
 
   ```
-  langchain-scripts\Scripts\Activate.ps1
+  virtual-env\Scripts\Activate.ps1
   ```
 
 - Install requirements: `pip install -r requirements.txt`
@@ -29,7 +29,7 @@
 
 - Create an `input_data` folder.
 - Put documents into `/input_data` folder, at the root of this repo.
-  - You can put them into a separate folder like `/input_data/my_docs` and later choose the folder loader in `scripts.py` for quick loading.
-- Run `py scripts.py`
+  - You can put them into a separate folder like `/input_data/my_docs` and later choose the folder loader in `main.py` for quick loading.
+- Run `py main.py`
   - When asked for file paths, don't include `./input_data` or `./output_data`
 - A new FAISS vector database should be outputed into `/output_data`

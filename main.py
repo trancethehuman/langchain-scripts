@@ -1,13 +1,17 @@
-import os
 import csv
+import os
 from typing import List
+
+from bs4 import BeautifulSoup as Soup
 from dotenv import load_dotenv
-from langchain.document_loaders import TextLoader
-from langchain.document_loaders import DirectoryLoader, UnstructuredURLLoader, UnstructuredFileLoader, PDFMinerLoader
+from langchain.document_loaders import (DirectoryLoader, PDFMinerLoader,
+                                        TextLoader, UnstructuredFileLoader,
+                                        UnstructuredURLLoader)
 from langchain.document_loaders.csv_loader import CSVLoader
-from langchain.vectorstores.faiss import FAISS
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders.recursive_url_loader import RecursiveUrlLoader
 from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.vectorstores.faiss import FAISS
 
 load_dotenv()  # Required to load .env
 
@@ -17,6 +21,15 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 embeddings = OpenAIEmbeddings(max_retries=2)  # type: ignore
 
 input_folder_path = "./input_data/"
+
+
+def load_urls_recursively(url: str):
+    loader = RecursiveUrlLoader(
+        url=url, max_depth=7, extractor=lambda x: Soup(x, "html.parser").text)
+
+    docs = loader.load()
+
+    return docs
 
 
 def load_all_documents_not_csv_from_folder(folder_path: str, glob_pattern: str = ""):
@@ -94,7 +107,7 @@ def save_faiss_locally(vectorstore, name: str):
 
 def initialize_vectorstore(input, vectorstore_name: str):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1200, chunk_overlap=500)
+        chunk_size=1500, chunk_overlap=200)
 
     texts = ""
     if (input is not None):
@@ -135,7 +148,7 @@ def merge_faiss(faiss_paths: str, new_faiss_name: str):
 
 def command_line():
     first_choice = input(
-        "What would you like to do? Load docs (folder, txt, csv, urls, pdf) or merge FAISS vectorstores (merge_faiss): ")
+        "What would you like to do? Load docs (folder, txt, csv, urls, , urls_recursively, pdf) or merge FAISS vectorstores (merge_faiss): ")
 
     if (first_choice) == "merge_faiss":
         faiss_paths = input("List of FAISS vectorstores' paths: ")
@@ -173,6 +186,13 @@ def command_line():
             input("Paste the URLs here (separated by commas): "))
         initialize_vectorstore(knowledge,
                                input("Vectorstore name: "))
+
+    if (first_choice) == "urls_recursively":
+        documents = load_urls_recursively(
+            input("Paste the URL here: "))
+        initialize_vectorstore(documents,
+                               input("Vectorstore name: "))
+
     # if (first_choice) == "urls_from_csv":
     #     csv_path = input("Path to .csv file: ")
     #     csv_column = input("What's the column that holds the URLs? ")
